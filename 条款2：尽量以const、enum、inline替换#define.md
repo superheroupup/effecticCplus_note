@@ -1,0 +1,20 @@
+### 条款2：尽量以const、enum、inline替换#define
+1.在编译阶段发现问题，如果使用define那么在预处理阶段就把完成了替换，那么不容易发现错误。(使用define出错时报错信息为3.14---而不是PI)
+```
+  #define PI 3.1415926
+  注意 ： #define name "xiaoming" -->替换为  char* const name = "xiaoming"
+        1)char* const name 与 const char* 的区别  从右往左读
+          char const* name -->  name is a const pointer to char 
+          const char* name -->  name is a pointer to const char
+        2) 预定义函数时一般用do{}while(0) : https://blog.csdn.net/kangroger/article/details/41318613  
+```
+2.如果使用define的话范围太大，而是用const可以限制使用范围
+```
+  #define a 1   //哪里都可以使用
+  class test
+  {
+    static const int a = 1; //类范围内使用
+  }
+```
+
+### 条款3：尽可能使用const
